@@ -26,7 +26,17 @@ message2 = price + '원'
 # 메세지 발송
 requests.get(TELEGRAM_URL + message1 + '\n' + message2)
 
+'''
+클라이언트가 요청을 URL
+서버가 응답을 문서(글자)
+
+크롤링? 문서 전체 다운 => 원하는 거 찾기
+
+API / GUI
+
+클라이언트 SW => 브라우저 / requests
 
 
 
-
+Parsing => bs4
+'''
