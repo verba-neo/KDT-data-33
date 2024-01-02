@@ -36,7 +36,5 @@ API / GUI
 
 클라이언트 SW => 브라우저 / requests
 
-
-
 Parsing => bs4
 '''
