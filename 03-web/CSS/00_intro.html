@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+  <!-- 2. -->
+  <style>
+    .green-md {
+      color: green;
+      font-size: 24px;
+    }
+  </style>
+
+  <!-- 3. -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <h1>CSS 적용하기</h1>
+
+  <!-- 1. inline CSS (마크업에 직접 쓰기) => X -->
+  <p style="font-size: 30px; color: red;">
+    Inline CSS
+  </p>
+
+  <!-- 2. <head> 태그 안에 <style> 태그 작성하기 -->
+  <p class="green-md">head > style Tag</p>
+  <a class="green-md" href="#">This is a LINK</a>
+
+  <!-- 3. 별도의 CSS파일로 분리하기 -->
+  <p class="blue-sm">Seperated CSS file</p>
+</body>
+</html>
