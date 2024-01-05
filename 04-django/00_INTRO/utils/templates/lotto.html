@@ -7,9 +7,21 @@
 </head>
 <body>
   <h1>Lotto</h1>
+
+  <p>
+    {{ => 출력
+    {% => 논리
+  </p>
+
   <p>
     <!-- Django Template Language (DTL) -->
     {{ lotto_numbers }}
   </p>
+
+  <ul>
+    {% for num in lotto_numbers %}
+      <li>{{ num }}</li>
+    {% endfor %}
+  </ul>
 </body>
 </html>
