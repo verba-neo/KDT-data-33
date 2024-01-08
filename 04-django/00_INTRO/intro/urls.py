@@ -24,4 +24,6 @@ urlpatterns = [
     path('home/', include('home.urls')),
     # 127.0.0.1:8000/utils/????
     path('utils/', include('utils.urls')),
+    # /recap/????
+    path('recap/', include('recap.urls')),
 ]

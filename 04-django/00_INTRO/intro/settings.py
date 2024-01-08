@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # app 생성시 제일 먼저 할 일 => INSTALLED_APPS에 등록하기
     'home',
     'utils',
+    'recap',
 ]
 
 MIDDLEWARE = [
