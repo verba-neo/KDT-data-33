@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Ping (양식)</h1>
+<p>/form/ping/</p>
+
+<form action="/form/pong/" method="GET">
+
+  <div>
+    <label for="title">제목: </label>
+    <!-- 서버측에서 사용자 입력 데이터를 받아볼 이름(name) 속성-->
+    <input type="text" id="title" name="qwer">
+  </div>
+
+  <div>
+    <label for="content">내용: </label>
+    <textarea name="asdf" id="content" cols="30" rows="10"></textarea>
+  </div>
+
+  <div>
+    <input type="submit">
+  </div>
+
+</form>
+{% endblock content %}
