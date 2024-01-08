@@ -7,8 +7,9 @@ urlpatterns = [
     # /var_routing/
     path('', views.index),
     # /var_routing/greeting/유태영/
-    path('greeting/name/', views.greeting),
+    path('greeting/<str:name>/', views.greeting),
 
-    # /var_routing/no/2023/ 
+    # /var_routing/cube/3/ 
+    path('cube/<int:num>/', views.cube),
 
 ]
