@@ -7,9 +7,10 @@ def ping(request):
 
 
 def pong(request):
-    x = request.GET['qwer']
-    y = request.GET['asdf']
+    title = request.GET['title']
+    content = request.GET['content']
 
-    print(x, y)
-
-    return render(request, 'form/pong.html')
+    return render(request, 'form/pong.html', {
+        'title': title,
+        'content': content,
+    })
