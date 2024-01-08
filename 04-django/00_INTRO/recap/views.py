@@ -2,9 +2,8 @@ from django.shortcuts import render
 from datetime import datetime
 import random
 
-
-def index2(request):
-    return render(request, 'index2.html')
+def index(request):
+    return render(request, 'recap/index.html')
 
 
 def is_xmas(request):
@@ -14,7 +13,7 @@ def is_xmas(request):
     else:
         result = 'No'
 
-    return render(request, 'is_xmas.html', {
+    return render(request, 'recap/is_xmas.html', {
         'result': result,
     })
 
@@ -25,6 +24,8 @@ def lunch(request):
     
     menu = random.choice(menus)
 
-    return render(request, 'lunch.html', {
+    return render(request, 'recap/lunch.html', {
         'menu': menu,
     })
+
+
