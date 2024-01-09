@@ -31,13 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Native Apps (django 내장 app)
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # 3rd Party Apps (외부 라이브러리 app)
+    'django_extensions',
+    # Local Apps (내가 만든 app)
     'hospital',
 ]
 
