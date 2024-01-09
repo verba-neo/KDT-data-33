@@ -1,7 +1,7 @@
 from django.db import models
 
 
-# 클래스 생성 => ORM => 테이블 생성
+# models.py의 존재 이유 => 클래스 생성 => ORM => 테이블 생성
 
 # 클래스 명 => 테이블 명
 class Patient(models.Model):
@@ -20,13 +20,15 @@ class Patient(models.Model):
 
 '''
 
+
+# 아래 코드는 예시 코드를 기록으로 남겨놓은것.
+
 # 현재의 파일(02_MODEL/hospital/models.py)이 
 # 직접 실행($ python models.py)된 경우에만 아래 조건문 블럭
 if __name__ == '__main__':
     # DB patient 테이블 조작
 
-    # Create (생성)
-    
+# Create (생성)
     # 레코드 한줄 만들기
     p1 = Patient()
     # 컬럼 채우기
@@ -52,27 +54,27 @@ if __name__ == '__main__':
     p4.save()
 
 
-    # Read 전체 조회
+# Read 전체 조회
     Patient.objects.all()
     # 전체 환자의 나이 => 몸무게만 print 해보려면?
     for patient in Patient.objects.all():
         print(patient.age, patient.weight)
 
-    # Read 단일 조회
+# Read 단일 조회
     p2 = Patient.objects.get(name='이환자')
     print(p2.name, p2.age, p2.weight, p2.height)
     
     p3 = Patient.objects.get(id=3)
     p3 = Patient.objects.get(pk=3)
 
-    # # Read 조건 조회 (무시)
+# # Read 조건 조회 (무시)
     # # 나이가 25 이상인 사람들 (Greater Than or Equal)
     # Patient.objects.filter(age__gte=25)
     # # 키가 170보다 작은 사람들 (Less Than)
     # Patient.objects.filter(height__lt=170)
 
     
-    # Update 수정
+# Update 수정
     # 한명을 고르고
     p1 = Patient.objects.get(pk=1)
     # 수정하고
@@ -81,14 +83,14 @@ if __name__ == '__main__':
     # 저장한다
     p1.save()
 
-    # Delete 삭제
+# Delete 삭제
     # 한명을 고르고
     p4 = Patient.objects.get(pk=4)
     # 삭제한다 (save 없이 바로 반영)
     p4.delete()
 
 
-    # C => R => U => D
+# C => R => U => D
     Patient.objects.create(name='최환자', age=45, weight=68.0, height=171.4, mbti='INFP')
     
     patients = Patient.objects.all()
@@ -102,6 +104,16 @@ if __name__ == '__main__':
 
     # p5 = Patient.objects.get(pk=5)
     p5.delete()
+
+
+    for i in range(10):
+        import random
+        mbtis = ['ISTP', 'ENFJ', 'INTP', 'ESTJ']
+        age = random.choice(range(10, 100))
+        weight = random.choice(range(30, 100))
+        height = random.choice(range(150, 200))
+        mbti = random.choice(mbtis)
+        Patient.objects.create(name='샘플환자', age=age, weight=weight, height=height, mbti=mbti)
 
 
 
