@@ -9,8 +9,8 @@ def bmi_in(request):
 def bmi_out(request):
     # bmi_in 에서 넘어온 데이터로
     # BMI 를 계산하여 사용자에게 보여줌
-    height = float(request.GET['height'])
-    weight = float(request.GET['weight'])
+    height = float(request.POST['height'])
+    weight = float(request.POST['weight'])
 
     bmi = weight / (height / 100) ** 2
     bmi = round(bmi, 2)
