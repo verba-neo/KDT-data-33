@@ -55,9 +55,9 @@ if __name__ == '__main__':
 
 
 # Read 전체 조회
-    Patient.objects.all()
+    patients = Patient.objects.all()
     # 전체 환자의 나이 => 몸무게만 print 해보려면?
-    for patient in Patient.objects.all():
+    for patient in patients:
         print(patient.age, patient.weight)
 
 # Read 단일 조회
