@@ -104,16 +104,3 @@ if __name__ == '__main__':
 
     # p5 = Patient.objects.get(pk=5)
     p5.delete()
-
-
-    for i in range(10):
-        import random
-        mbtis = ['ISTP', 'ENFJ', 'INTP', 'ESTJ']
-        age = random.choice(range(10, 100))
-        weight = random.choice(range(30, 100))
-        height = random.choice(range(150, 200))
-        mbti = random.choice(mbtis)
-        Patient.objects.create(name='샘플환자', age=age, weight=weight, height=height, mbti=mbti)
-
-
-
