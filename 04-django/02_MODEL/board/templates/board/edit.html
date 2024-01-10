@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- edit.html -->
+
+<h1>Edit Article</h1>
+
+<form action="{% url "board:update" article.pk %}" method="POST">
+  {% csrf_token %}
+  <div>
+    <label for="title">제목: </label>
+    <input type="text" id="title" name="title" value="{{ article.title }}">
+  </div>
+
+  <div>
+    <label for="content">내용: </label>
+    <textarea name="content" id="content" cols="30" rows="10">{{ article.content }}</textarea>
+  </div>
+
+  <div>
+    <input type="submit">
+  </div>
+
+</form>
+
+{% endblock content %}

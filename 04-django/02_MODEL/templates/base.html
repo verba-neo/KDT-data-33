@@ -6,7 +6,16 @@
   <title>Document</title>
 </head>
 <body>
-  <p>This is base.html</p>
+  <nav>
+    <ul>
+      <li>
+        <a href="{% url "board:index" %}">Home</a>
+      </li>
+      <li>
+        <a href="{% url "board:new" %}">New Article</a>
+      </li>
+    </ul>
+  </nav>
 
   {% block content %}{% endblock content %}
 </body>

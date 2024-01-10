@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+<!-- new.html -->
 <h1>New Article</h1>
 
-<form action="/board/create/" method="POST">
+<form action="{% url "board:create" %}" method="POST">
   {% csrf_token %}
   <div>
     <label for="title">제목: </label>
@@ -21,7 +21,5 @@
   </div>
 
 </form>
-
-
 
 {% endblock content %}

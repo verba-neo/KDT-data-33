@@ -7,7 +7,7 @@
 <ul>
   {% for article in articles %}
     <li>
-      {{ article.pk }} | {{ article.title }}
+      <a href="{% url "board:detail" article.pk %}">{{ article.title }}</a>
     </li>
   {% endfor %}
 </ul>

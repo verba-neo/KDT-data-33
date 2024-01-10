@@ -6,7 +6,24 @@
 <h1>{{ article.title }}</h1>
 
 <p>
-  {{ article.content }}
+  <!-- 
+    <textarea> 를 통해 엔터를 입력받은 경우 화면에서 <br>로 표시
+  -->
+  {{ article.content | linebreaksbr }}
 </p>
+
+<div>
+  <a href="{% url "board:edit" article.pk %}">
+    <button>수정</button>
+  </a>
+</div>
+
+<div>
+  <a href="{% url "board:delete" article.pk %}">
+    <button onclick="return confirm('ㄹㅇ삭제?')">
+      삭제
+    </button>
+  </a>
+</div>
 
 {% endblock content %}
