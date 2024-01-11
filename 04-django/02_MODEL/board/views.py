@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect
 from .models import Article
+from .forms import ArticleForm
 
 # 생성
 def new(request):
-    return render(request, 'board/new.html')
+    form = ArticleForm()
+    return render(request, 'board/new.html', {
+        'form': form,
+    })
 
 
 def create(request):
-    article = Article()
-    article.title = request.POST['title']
-    article.content = request.POST['content']
-    article.save()
-    # 저장 후 상세보기로 redirect
-    return redirect('board:detail', article.pk)
+    # 넘어온 데이터를 통째로 form 에 입력
+    form = ArticleForm(request.POST)
+    # form 이 유효하다면,
+    if form.is_valid():
+        # form을 통해 article instance 저장
+        article = form.save()
+        # 저장 후 상세보기로 redirect
+        return redirect('board:detail', article.pk)
 
 
 # 조회
