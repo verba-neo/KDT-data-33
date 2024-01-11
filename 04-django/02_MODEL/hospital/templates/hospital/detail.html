@@ -1,0 +1,25 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<h1>{{ patient.name }}</h1>
+<p>{{ patient.age }}살</p>
+<p>{{ patient.height}} cm</p>
+<p>{{ patient.weight }} kg</p>
+<p>{{ patient.mbti }}</p>
+
+
+<div>
+  <a href="{% url "hospital:edit" patient.pk %}">
+    <button>수정</button>
+  </a>
+</div>
+
+<div>
+  <a href="{% url "hospital:delete" patient.pk %}">
+    <button onclick="return confirm('ㄹㅇ삭제?')">
+      삭제
+    </button>
+  </a>
+</div>
+
+{% endblock content %}

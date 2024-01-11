@@ -1,0 +1,35 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<h1>New Patient</h1>
+
+<form action="{% url "hospital:create" %}" method="POST">
+  {% csrf_token %}
+  <div>
+    <label for="name">이름: </label>
+    <input type="text" id="name" name="name">
+  </div>
+  <div>
+    <label for="age">나이: </label>
+    <input type="number" id="age" name="age">
+  </div>
+  <div>
+    <label for="weight">몸무게: </label>
+    <input type="number" step="0.1" id="weight" name="weight">
+  </div>
+  <div>
+    <label for="height">키: </label>
+    <input type="number" step="0.1" id="height" name="height">
+  </div>
+  <div>
+    <label for="mbti">MBTI: </label>
+    <input type="text" id="mbti" name="mbti">
+  </div>
+  <div>
+    <input type="submit">
+  </div>
+
+</form>
+
+{% endblock content %}

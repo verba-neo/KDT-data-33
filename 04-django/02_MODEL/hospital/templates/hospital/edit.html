@@ -1,0 +1,36 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<!-- edit.html -->
+
+<h1>Edit Patient</h1>
+
+<form action="{% url "hospital:update" patient.pk %}" method="POST">
+  {% csrf_token %}
+  <div>
+    <label for="name">이름: </label>
+    <input type="text" id="name" name="name" value="{{ patient.name }}">
+  </div>
+  <div>
+    <label for="age">나이: </label>
+    <input type="number" id="age" name="age" value="{{ patient.age }}">
+  </div>
+  <div>
+    <label for="weight">몸무게: </label>
+    <input type="number" step="0.1" id="weight" name="weight" value="{{ patient.weight }}">
+  </div>
+  <div>
+    <label for="height">키: </label>
+    <input type="number" step="0.1" id="height" name="height" value="{{ patient.height }}">
+  </div>
+  <div>
+    <label for="mbti">MBTI: </label>
+    <input type="text" id="mbti" name="mbti" value="{{ patient.mbti }}">
+  </div>
+  <div>
+    <input type="submit">
+  </div>
+
+</form>
+
+{% endblock content %}

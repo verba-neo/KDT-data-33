@@ -1,0 +1,16 @@
+{% extends "base2.html" %}
+
+{% block content %}
+
+<h1>All Patients</h1>
+
+<ul>
+  {% for patient in patients %}
+    <li>
+      <a href="{% url "hospital:detail" patient.pk %}">{{ patient.name }}({{ patient.age }})</a>
+    </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock content %}
