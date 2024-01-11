@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
 from .models import Patient
-
+from .forms import PatientForm
 
 def new(request):
-    return render(request, 'hospital/new.html')
+    form = PatientForm()
+    return render(request, 'hospital/new.html', {
+        'form': form,
+    })
 
 
 def create(request):
-    patient = Patient()
-    patient.name = request.POST['name']
-    patient.age = request.POST['age']
-    patient.height = request.POST['height']
-    patient.weight = request.POST['weight']
-    patient.mbti = request.POST['mbti']
-    patient.save()
-    return redirect('hospital:detail', patient.pk)
+    form = PatientForm(request.POST)
+    if form.is_valid():
+        patient = form.save()
+        return redirect('hospital:detail', patient.pk)
+    else:
+        return render(request, 'hospital/new.html', {
+            'form': form,
+        })
 
 
 def index(request):
@@ -33,20 +36,24 @@ def detail(request, pk):
 
 def edit(request, pk):
     patient = Patient.objects.get(pk=pk)
+    form = PatientForm(instance=patient)
+
     return render(request, 'hospital/edit.html', {
         'patient': patient,
+        'form': form,
     })
 
 
 def update(request, pk):
     patient = Patient.objects.get(pk=pk)
-    patient.name = request.POST['name']
-    patient.age = request.POST['age']
-    patient.height = request.POST['height']
-    patient.weight = request.POST['weight']
-    patient.mbti = request.POST['mbti']
-    patient.save()
-    return redirect('hospital:detail', patient.pk)
+    form = PatientForm(request.POST, instance=patient)
+    if form.is_valid():
+        patient = form.save()
+        return redirect('hospital:detail', patient.pk)
+    else:
+        return render(request, 'hospital/edit.html', {
+            'form': form,
+        })
 
 
 def delete(request, pk):
