@@ -13,17 +13,20 @@
 </p>
 
 <div>
-  <a href="{% url "board:edit" article.pk %}">
+  <a href="{% url "board:update" article.pk %}">
     <button>수정</button>
   </a>
 </div>
 
 <div>
-  <a href="{% url "board:delete" article.pk %}">
+  <form action="{% url "board:delete" article.pk %}" method="POST">
+    {% csrf_token %}
+    <!-- form > button 은 submit 을 대체 -->
     <button onclick="return confirm('ㄹㅇ삭제?')">
       삭제
     </button>
-  </a>
+  </form>
+
 </div>
 
 {% endblock content %}
