@@ -92,5 +92,10 @@ if __name__ == '__main__':
     p = Product.objects.get(name='Neo QLED 8K')
     Company.objects.filter(country=p.company.country)
 
-    
+    # 다른나라 기업 / 제품들을 몇개 추가해 보기
+
+    # 한국 기업들의 제품들의 가격 평균 (Python만 가지고)
+
+    # Query => 사람말 => DB 에 조회하는거 ()
+
 
