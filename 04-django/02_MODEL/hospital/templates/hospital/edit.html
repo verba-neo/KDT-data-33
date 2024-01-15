@@ -5,7 +5,7 @@
 
 <h1>Edit Patient</h1>
 
-<form action="{% url "hospital:update" patient.pk %}" method="POST">
+<form method="POST">
   {% csrf_token %}
   {{ form }}
   <div>

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Local Apps (내가 만든 app)
     'hospital',
     'board',
+    'one_to_many',
 ]
 
 MIDDLEWARE = [
