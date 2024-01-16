@@ -95,7 +95,11 @@ if __name__ == '__main__':
     # 다른나라 기업 / 제품들을 몇개 추가해 보기
 
     # 한국 기업들의 제품들의 가격 평균 (Python만 가지고)
+    total = count = 0
+    for c in Company.objects.filter(country='KR'):
+        for p in c.product_set.all():
+            count += 1
+            total += p.price
 
+    print(total / count)
     # Query => 사람말 => DB 에 조회하는거 ()
-
-

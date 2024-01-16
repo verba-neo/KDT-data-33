@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_safe, require_http_methods, require_POST
 
-from .models import Article
-from .forms import ArticleForm
+from .models import Article, Comment
+from .forms import ArticleForm, CommentForm
 
 
 @require_http_methods(['GET', 'POST'])
@@ -58,3 +58,15 @@ def delete(request, pk):
     article = get_object_or_404(Article, pk=pk)
     article.delete()
     return redirect('board:index')
+
+
+
+# HTML(<form>) 은 article detail 에서 제공
+# 여기서는 검증 => 저장만 진행
+def create_comment(request, pk):  # board/1/comments/create/
+    form = CommentForm(request.POST)
+    
+    if form.is_valid():
+        comment = form.save()
+
+    return redirect('board:detail', pk)

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Article
+from .models import Article, Comment
 
 # ModelForm => 특정 모델과 연동되는 Form
 # 사용자 입력 HTML (input/textarea/..)을 생성
@@ -23,3 +23,12 @@ class ArticleForm(forms.ModelForm):
         model = Article
         # 아래에 입력된 필드에 대해서만 검증 
         fields = '__all__'
+
+
+class CommentForm(forms.ModelForm):
+
+    content = forms.CharField(min_length=2, max_length=100)
+
+    class Meta:
+        model = Comment
+        fiedls = '__all__'
