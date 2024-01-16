@@ -61,9 +61,9 @@ def delete(request, pk):
     return redirect('board:index')
 
 
-
 # HTML(<form>) 은 article detail 에서 제공
 # 여기서는 검증 => 저장만 진행
+@require_POST
 def create_comment(request, pk):  # board/1/comments/create/
     article = get_object_or_404(Article, pk=pk)
     form = CommentForm(request.POST)
@@ -77,3 +77,13 @@ def create_comment(request, pk):  # board/1/comments/create/
 
     return redirect('board:detail', pk)
 
+
+# /board/1/comments/1/delete/
+def delete_comment(request, pk, comment_pk):
+    article = get_object_or_404(Article, pk=pk)
+    # comment 를 하나 찾아서,
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    # 삭제하고
+    comment.delete()
+    # 게시글 상세페이지로 리다이렉트
+    return redirect('board:detail', article.pk)

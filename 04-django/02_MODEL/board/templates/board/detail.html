@@ -29,13 +29,26 @@
 </div>
 
 <hr>
-
+<!-- Comment Create Form -->
 <div>
   <form action="{% url "board:create_comment" article.pk %}" method="POST">
     {% csrf_token %}
     {{ form }}
     <button>댓글작성</button>
   </form>
+</div>
+<!-- Comment Read List -->
+<div>
+  <ul>
+  {% for comment in article.comment_set.all %}
+    <li>
+      {{ comment.content }}
+      
+      <button>삭제</button>
+      
+    </li>
+  {% endfor %}
+  </ul>
 </div>
 
 
