@@ -26,7 +26,17 @@
       삭제
     </button>
   </form>
-
 </div>
+
+<hr>
+
+<div>
+  <form action="{% url "board:create_comment" article.pk %}" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <button>댓글작성</button>
+  </form>
+</div>
+
 
 {% endblock content %}

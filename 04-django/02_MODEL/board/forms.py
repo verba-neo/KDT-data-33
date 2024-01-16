@@ -31,4 +31,4 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fiedls = '__all__'
+        fields = ('content',)
