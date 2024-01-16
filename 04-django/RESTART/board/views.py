@@ -7,12 +7,15 @@ from .forms import ArticleForm, CommentForm
 
 @require_http_methods(['GET', 'POST'])
 def article_create(request):
+    # POST => 데이터 저장하기
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
             article = form.save()
             return redirect('board:article_detail', article.pk)
-    else:
+            
+    # GET => 화면(html form>주기
+    elif request.method == 'GET':
         form = ArticleForm()
 
     return render(request, 'board/form.html', {
@@ -41,12 +44,16 @@ def article_detail(request, article_pk):
 @require_http_methods(['GET', 'POST'])
 def article_update(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+
+    # POST => 데이터 저장하기
     if request.method == 'POST':
         form = ArticleForm(request.POST, instance=article)
         if form.is_valid():
             article = form.save()
             return redirect('board:article_detail', article.pk)
-    else:
+            
+    # GET => 화면(html form)주기
+    elif request.method == 'GET':
         form = ArticleForm(instance=article)
 
     return render(request, 'board/form.html', {

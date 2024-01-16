@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+<!-- detail.html -->
+{% block content %}
+
+<h1>{{ article.title }}</h1>
+
+<p>{{ article.content | linebreaksbr }}</p>
+
+<div>
+  <a href="{% url "board:article_update" article.pk %}">
+    <button>수정</button>
+  </a>
+</div>
+
+<div>
+  <form action="{% url "board:article_delete" article.pk %}" method="POST">
+    {% csrf_token %}
+    <button onclick="return confirm('삭제')">삭제</button>
+  </form>
+</div>
+
+<hr>
+
+{% endblock content %}
