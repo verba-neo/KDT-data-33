@@ -42,10 +42,12 @@
   <ul>
   {% for comment in article.comment_set.all %}
     <li>
-      {{ comment.content }}
-      
-      <button>삭제</button>
-      
+      {{ comment.content }} | 
+      <form action="{% url "board:delete_comment" article.pk comment.pk %}" method="POST" 
+            style="display: inline-block;">
+        {% csrf_token %}
+        <button onclick="return confirm('삭제?')">삭제</button>
+      </form>
     </li>
   {% endfor %}
   </ul>

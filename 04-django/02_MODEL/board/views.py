@@ -64,10 +64,10 @@ def delete(request, pk):
 # HTML(<form>) 은 article detail 에서 제공
 # 여기서는 검증 => 저장만 진행
 @require_POST
-def create_comment(request, pk):  # board/1/comments/create/
+def create_comment(request, pk):  # board/123456/comments/create/
     article = get_object_or_404(Article, pk=pk)
     form = CommentForm(request.POST)
-    
+
     if form.is_valid():
         # comment 인스턴스에 내용을 채우되, 저장 직전에서 멈춰라
         comment = form.save(commit=False)
@@ -75,10 +75,10 @@ def create_comment(request, pk):  # board/1/comments/create/
         comment.article = article
         comment.save()
 
-    return redirect('board:detail', pk)
+    return redirect('board:detail', article.pk)
 
 
-# /board/1/comments/1/delete/
+@require_POST
 def delete_comment(request, pk, comment_pk):
     article = get_object_or_404(Article, pk=pk)
     # comment 를 하나 찾아서,

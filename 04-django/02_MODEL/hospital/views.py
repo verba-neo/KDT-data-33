@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
 
-from .models import Patient
-from .forms import PatientForm
+from .models import Patient, Interview
+from .forms import PatientForm, InterviewForm
 
 
 @require_http_methods(['GET', 'POST'])
@@ -30,8 +30,10 @@ def index(request):
 @require_safe
 def detail(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
+    form = InterviewForm()
     return render(request, 'hospital/detail.html', {
         'patient': patient,
+        'form': form,
     })
 
 
@@ -55,3 +57,15 @@ def delete(request, pk):
     patient = get_object_or_404(Patient, pk=pk)
     patient.delete()
     return redirect('hospital:index')    
+
+
+def create_interview(request, pk):
+    patient = get_object_or_404(Patient, pk=pk)
+    form = InterviewForm(request.POST)
+    if form.is_valid():
+        interview = form.save(commit=False)
+        interview.patient = patient
+        interview.save()
+        return redirect('hospital:detail', patient.pk)
+    else:
+        print(form.errors)

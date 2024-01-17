@@ -35,9 +35,11 @@ def article_index(request):
 @require_safe
 def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-
+    # comment create 를 위한 form
+    form = CommentForm()
     return render(request, 'board/detail.html', {
         'article': article,
+        'form': form,
     })
 
 
@@ -68,9 +70,22 @@ def article_delete(request, article_pk):
     return redirect('board:article_index')
 
 
+@require_POST
 def comment_create(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        # 저장 직전에 멈춰!
+        comment = form.save(commit=False)
+        comment.article = article
+        comment.save()
+    # 저장과 상관없이 마지막엔 redirect        
+    return redirect('board:article_detail', article.pk)
 
 
+@require_POST
 def comment_delete(request, article_pk, comment_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    comment.delete()
+    return redirect('board:article_detail', article.pk)

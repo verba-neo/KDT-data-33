@@ -1,9 +1,6 @@
 from django.db import models
 
 
-# models.py의 존재 이유 => 클래스 생성 => ORM => 테이블 생성
-
-# 클래스 명 => 테이블 명
 class Patient(models.Model):
     # 필드명 = 필드 타입
     name =   models.CharField(max_length=30)
@@ -12,19 +9,16 @@ class Patient(models.Model):
     height = models.FloatField()
     mbti =   models.CharField(max_length=4)
 
-'''
-1. 테이블에 대응하는 모델 클래스 생성
-2. 컬럼에 대응하는 필드 클래스 변수 생성
-3. python manage.py makemigrations <app_name>
-4. python manage.py migrate <app_name>
 
-'''
+class Interview(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+    date = models.DateField()  # form 에서 따로 건들지 말자.
 
 
-# 아래 코드는 예시 코드를 기록으로 남겨놓은것.
 
-# 현재의 파일(02_MODEL/hospital/models.py)이 
-# 직접 실행($ python models.py)된 경우에만 아래 조건문 블럭
+
+
 if __name__ == '__main__':
     # DB patient 테이블 조작
 

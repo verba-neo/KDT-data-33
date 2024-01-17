@@ -9,17 +9,25 @@
 
 
 <div>
-  <a href="{% url "hospital:edit" patient.pk %}">
+  <a href="{% url "hospital:update" patient.pk %}">
     <button>수정</button>
   </a>
 </div>
 
 <div>
-  <a href="{% url "hospital:delete" patient.pk %}">
+  <form action="{% url "hospital:delete" patient.pk %}" method="POST">
+    {% csrf_token %}
     <button onclick="return confirm('ㄹㅇ삭제?')">
       삭제
     </button>
-  </a>
+  </form>
 </div>
+
+<hr>
+<form action="{% url "hospital:create_interview" patient.pk %}" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <button>Go</button>
+</form>
 
 {% endblock content %}

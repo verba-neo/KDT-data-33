@@ -1,5 +1,5 @@
 from django import forms
-from .models import Patient
+from .models import Patient, Interview
 
 class PatientForm(forms.ModelForm):
 
@@ -13,3 +13,12 @@ class PatientForm(forms.ModelForm):
         model = Patient
         # fields = '__all__'
         fields = ('name', 'age', 'weight', 'height', 'mbti')
+
+
+class InterviewForm(forms.ModelForm):
+
+    date = forms.DateField(widget=forms.DateInput(format='%Y-%m-%d', attrs={ 'type': 'date', }))
+
+    class Meta:
+        model = Interview
+        fields = ('content', 'date',)
