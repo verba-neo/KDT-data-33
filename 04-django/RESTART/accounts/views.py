@@ -41,4 +41,5 @@ def login(request):
 
 
 def logout(request):
-    pass
+    auth_logout(request)
+    return redirect('board:article_index')

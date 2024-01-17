@@ -1,10 +1,12 @@
 <div>
+  {% if request.user.is_authenticated %}
   <!-- 댓글 작성 UI -->
   <form action="{% url "board:comment_create" article.pk %}" method="POST">
     {% csrf_token %}
     {{ form }}
     <button>제출</button>
   </form>
+  {% endif %}
 
   <!-- 댓글 조회 UI -->
   <ul>

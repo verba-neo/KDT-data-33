@@ -5,8 +5,21 @@
     <li>
       <a href="{% url "board:article_index" %}">Home</a>
     </li>
+    <!-- 현재 요청보낸 사용자가 인증(로그인)되었다면, -->
+    {% if request.user.is_authenticated %}
     <li>
       <a href="{% url "board:article_create" %}">New Article</a>
     </li>
+    <li>
+      <a href="{% url "accounts:logout" %}">Logout</a>
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url "accounts:login" %}">Login</a>
+    </li>
+    <li>
+      <a href="{% url "accounts:signup" %}">Signup</a>
+    </li>
+    {% endif %}
   </ul>
 </nav>
