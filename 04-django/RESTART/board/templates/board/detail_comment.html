@@ -12,7 +12,7 @@
   <ul>
     {% for comment in article.comment_set.all %}
     <li>
-      {{ comment.user }}) {{ comment.content }}
+      <a href="{% url "accounts:profile" comment.user %}">{{ comment.user }}</a> => {{ comment.content }}
 
       {% if request.user == comment.user %}
       <!-- 댓글 삭제 UI -->

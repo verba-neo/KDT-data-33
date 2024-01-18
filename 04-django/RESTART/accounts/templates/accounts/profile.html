@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+<!-- accounts/profile.html -->
+{% block content %}
+
+<h1>{{ user.username }}</h1>
+
+<h2>Articles</h2>
+<ul>
+  {% for article in user.article_set.all %}
+  <li>
+    <a href="{% url "board:article_detail" article.pk %}">
+      {{ article.title }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+
+<h2>Comments</h2>
+<ul>
+  {% for comment in user.comment_set.all %}
+  <li>
+    <!-- 댓글이 달려있는 게시글의 pk가 필요 -->
+    <a href="{% url "board:article_detail" comment.article.pk %}">
+      {{ comment.content }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock content %}

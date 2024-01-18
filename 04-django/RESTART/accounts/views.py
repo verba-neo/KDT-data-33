@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_safe
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.contrib.auth import get_user_model
 
 
 @require_http_methods(['GET', 'POST'])
 def signup(request):
+    # 만약 사용자가 로그인한 상태라면
+    if request.user.is_authenticated:
+        return redirect('board:article_index')
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -23,6 +28,10 @@ def signup(request):
 
 @require_http_methods(['GET', 'POST'])
 def login(request):
+    # 만약 사용자가 로그인한 상태라면
+    if request.user.is_authenticated:
+        return redirect('board:article_index')
+
     if request.method == 'POST':
         # AuthenticationForm 은 다른 ModelForm 들과는 다르다! 
         form = AuthenticationForm(request, data=request.POST)
@@ -45,9 +54,11 @@ def logout(request):
     return redirect('board:article_index')
 
 
+@require_safe
 def profile(request, username):
-    # 프로필 페이지에서 보여줘야 하는것
-    # 사용자 username
-    # 사용자가 작성한 글들 (링크 => 해당 글의 detail)
-    # 사용자가 작성한 댓글들 (링크 => 댓글이 달린 글의 detail)
-    pass
+    # 사용자 단일 상세 조회
+    user = get_object_or_404(get_user_model(), username=username)
+    return render(request, 'accounts/profile.html', {
+        'user': user,
+    })
+    
