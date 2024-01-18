@@ -43,3 +43,11 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('board:article_index')
+
+
+def profile(request, username):
+    # 프로필 페이지에서 보여줘야 하는것
+    # 사용자 username
+    # 사용자가 작성한 글들 (링크 => 해당 글의 detail)
+    # 사용자가 작성한 댓글들 (링크 => 댓글이 달린 글의 detail)
+    pass

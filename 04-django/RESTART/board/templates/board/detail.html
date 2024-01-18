@@ -4,8 +4,11 @@
 
 <h1>{{ article.title }}</h1>
 
+<p>작성자: {{ article.user }}</p>
+
 <p>{{ article.content | linebreaksbr }}</p>
 
+{% if article.user == request.user %}
 <div>
   <a href="{% url "board:article_update" article.pk %}">
     <button>수정</button>
@@ -13,11 +16,12 @@
 </div>
 
 <div>
-  <form action="{% url "board:article_delete" article.pk %}" method="POST">
+  <form action="{%  url "board:article_delete" article.pk %}" method="POST">
     {% csrf_token %}
     <button onclick="return confirm('삭제')">삭제</button>
   </form>
 </div>
+{% endif %}
 
 <hr>
 
