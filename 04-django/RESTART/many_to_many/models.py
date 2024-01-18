@@ -31,6 +31,10 @@ l3.students.all()
 # s1 이 듣는 모든 수업을 보여줘
 s1.lectures.all()
 
+# l3 수강생들중 s4를 뺀다.
+l3.students.remove(s4)
 
+# s1 이 l2를 취소한다.
+s1.lectures.remove(l2)
 
 '''
