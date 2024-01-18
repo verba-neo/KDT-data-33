@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'board',
     'accounts',
+    'many_to_many',
 ]
 
 MIDDLEWARE = [
