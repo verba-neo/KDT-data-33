@@ -23,6 +23,8 @@
 </div>
 {% endif %}
 
+<button id="likeButton"></button>
+
 <!-- 수정/삭제 UI -->
 {% if article.user == request.user %}
 <hr>
@@ -33,7 +35,7 @@
 </div>
 
 <div>
-  <form action="{%  url "board:article_delete" article.pk %}" method="POST">
+  <form action="{% url "board:article_delete" article.pk %}" method="POST">
     {% csrf_token %}
     <button onclick="return confirm('삭제')">삭제</button>
   </form>
@@ -43,6 +45,23 @@
 <hr>
 
 {% include "board/detail_comment.html" %}
-
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+<script>
+  // AJAX Like
+  const URL = `{% url 'board:article_like' article.pk %}`
+  const btn = document.querySelector('#likeButton')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+  const isLike = `{{ is_like }}` === 'True'
+  btn.innerText = isLike ? '💓' : '🤍'
+  btn.addEventListener('click', function(event) {
+    fetch(URL, {
+      method: 'POST',
+      headers: {'X-CSRFToken': csrftoken},
+    })
+    .then(res => {
+      btn.innerText = btn.innerText === '🤍' ? '💓' : '🤍'
+    })
+  })
+</script>
 
 {% endblock content %}

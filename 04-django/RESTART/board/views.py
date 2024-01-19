@@ -39,7 +39,7 @@ def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     form = CommentForm()
     is_like = article.like_users.filter(pk=request.user.pk).exists()
-    
+
     return render(request, 'board/detail.html', {
         'article': article,
         'form': form,
@@ -113,6 +113,7 @@ def comment_delete(request, article_pk, comment_pk):
 @require_POST
 @login_required
 def article_like(request, article_pk):
+    
     article = get_object_or_404(Article, pk=article_pk)
     user = request.user
 
