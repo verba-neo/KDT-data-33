@@ -37,11 +37,13 @@ def article_index(request):
 @require_safe
 def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-    # comment create 를 위한 form
     form = CommentForm()
+    is_like = article.like_users.filter(pk=request.user.pk).exists()
+    
     return render(request, 'board/detail.html', {
         'article': article,
         'form': form,
+        'is_like': is_like,
     })
 
 
@@ -105,4 +107,25 @@ def comment_delete(request, article_pk, comment_pk):
         return redirect('board:article_detail', article.pk)
 
     comment.delete()
+    return redirect('board:article_detail', article.pk)
+
+
+@require_POST
+@login_required
+def article_like(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    user = request.user
+
+    # user in article.like_users.all() => 파이썬이 일함 (in 연산자)
+    # article.like_users.filter(pk=user.pk).exists() => DB가 일함 (SQL)
+    
+    # 좋아요를 이미 누른 상태라면
+    if article.like_users.filter(pk=user.pk).exists():
+        # 삭제
+        article.like_users.remove(user)
+    # 누르지 않았다면
+    else:
+        # 추가
+        article.like_users.add(user)
+
     return redirect('board:article_detail', article.pk)

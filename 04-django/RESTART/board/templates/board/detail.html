@@ -2,7 +2,7 @@
 <!-- detail.html -->
 {% block content %}
 
-<h1>{{ article.title }}</h1>
+<h1>{{ article.title }} </h1>
 
 <p>
   작성자: <a href="{% url "accounts:profile" article.user %}">{{ article.user }}</a>
@@ -10,7 +10,22 @@
 
 <p>{{ article.content | linebreaksbr }}</p>
 
+<!-- 좋아요 UI -->
+{% if request.user.is_authenticated %}
+<div>
+  <form action="{% url "board:article_like" article.pk %}" method="POST">
+    {% csrf_token %}
+    <button>
+      {% if is_like %}💓{% else %}🤍{% endif %}
+      {{ article.like_users.count }}
+    </button>
+  </form>
+</div>
+{% endif %}
+
+<!-- 수정/삭제 UI -->
 {% if article.user == request.user %}
+<hr>
 <div>
   <a href="{% url "board:article_update" article.pk %}">
     <button>수정</button>
