@@ -6,7 +6,7 @@ VALUES            ('맥스', '말티즈', 4);
 
 -- Error) 컬럼 순서대로 값을 넣어야 함.
 INSERT INTO dogs1 (name, breed, age)
-VALUES 		      ('소리', 4, '포메');
+VALUES 		      ('소리', 4, '포메');Stored Procedures
 
 -- 여러 데이터 한번에 입력 가능
 INSERT INTO dogs1 (name, breed, age)
